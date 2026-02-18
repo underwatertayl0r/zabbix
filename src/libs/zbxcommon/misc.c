@@ -188,11 +188,12 @@ char	*zbx_strdup2(const char *filename, int line, char *old, const char *str)
 {
 	char	*ptr = NULL;
 
-	zbx_free(old);
-
 	ptr = strdup(str);
 	if (NULL != ptr)
+	{
+		zbx_free(old);
 		return ptr;
+	}
 
 	zabbix_log(LOG_LEVEL_CRIT,
 			"[file:%s,line:%d] zbx_strdup: out of memory. Requested " ZBX_FS_SIZE_T " bytes.",
