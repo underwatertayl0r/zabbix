@@ -17,6 +17,7 @@ package modbus
 import (
 	"encoding/binary"
 	"fmt"
+	"math"
 	"net"
 	"net/url"
 	"runtime"
@@ -120,10 +121,16 @@ func getSerial(v string) (addr *Serial, err error) {
 		if speed, err = strconv.ParseUint(val, 10, 32); err != nil {
 			return &a, fmt.Errorf("unsupported speed value: %w", err)
 		}
+		if speed == 0 || speed > uint64(math.MaxInt32) {
+			return &a, fmt.Errorf("unsupported speed value: %d", speed)
+		}
 		a.Speed = uint32(speed)
 		return &a, nil
 	} else if speed, err = strconv.ParseUint(val[:inx], 10, 32); err != nil {
 		return nil, fmt.Errorf("unsupported speed value: %w", err)
+	}
+	if speed == 0 || speed > uint64(math.MaxInt32) {
+		return nil, fmt.Errorf("unsupported speed value: %d", speed)
 	}
 	a.Speed = uint32(speed)
 
