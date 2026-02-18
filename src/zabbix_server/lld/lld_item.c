@@ -1176,7 +1176,7 @@ static void	lld_validate_item_field(zbx_lld_item_full_t *item, char **field, cha
 		if (0 != (flag & ZBX_FLAG_LLD_ITEM_UPDATE_KEY))
 		{
 			zbx_truncate_itemkey(*field, VALUE_ERRMSG_MAX, value_short, sizeof(value_short));
-			lld_item_add_error(item, error, "value \"%s\" key \"%s\" is too long", value_short);
+			lld_item_add_error(item, error, "value \"%s\" key \"%s\" is too long", value_short, *field);
 		}
 		else
 		{
