@@ -841,7 +841,7 @@ static int	DBcheck_nodes(void)
 	/* pre 7.4 has config table */
 	if (SUCCEED == zbx_db_table_exists("config"))
 	{
-		result = zbx_db_select("select " ZBX_DB_TIMESTAMP() ",ha_failover_delay from config");
+		result = zbx_db_select("select " ZBX_DB_TIMESTAMP() ",ha_failover_delay from config", "db_time");
 	}
 	else if (SUCCEED == zbx_db_table_exists("settings"))
 	{
