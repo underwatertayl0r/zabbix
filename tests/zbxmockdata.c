@@ -952,7 +952,7 @@ zbx_mock_error_t	zbx_mock_uint64(zbx_mock_handle_t object, zbx_uint64_t *value)
 		ret = sscanf(tmp, "%lx", value);
 		zbx_free(tmp);
 
-		if (0 == ret)
+		if (1 != ret)
 			return ZBX_MOCK_NOT_AN_UINT64;
 	}
 
